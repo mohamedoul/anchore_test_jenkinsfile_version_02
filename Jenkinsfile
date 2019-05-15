@@ -20,8 +20,8 @@ node {
          * For this example, we're using a Volkswagen-type approach ;-) */
 
    
-            aquaMicroscanner imageName: 'getintodevops/hellonode', notCompliesCmd: 'exit 1000', onDisallowed: 'fail',  outputFormat: 'json'
-            sh 'echo "Tests passed"'
+  writeFile file: anchorefile, text: inputConfig['dockerRegistryHostname'] + "/" + repotag + " " + dockerfile
+anchore name: anchorefile, engineurl: inputConfig['anchoreEngineUrl'], engineCredentialsId: inputConfig['anchoreEngineCredentials'], annotations: [[key: 'added-by', value: 'jenkins']]
      
     }
 }
